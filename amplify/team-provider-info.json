@@ -1,0 +1,20 @@
+{
+  "poxdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-poxpos-poxdev-142651-authRole",
+      "UnauthRoleArn": "arn:aws:iam::237587349349:role/amplify-poxpos-poxdev-142651-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::237587349349:role/amplify-poxpos-poxdev-142651-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-poxpos-poxdev-142651-deployment",
+      "UnauthRoleName": "amplify-poxpos-poxdev-142651-unauthRole",
+      "StackName": "amplify-poxpos-poxdev-142651",
+      "StackId": "arn:aws:cloudformation:us-east-2:237587349349:stack/amplify-poxpos-poxdev-142651/873edaf0-5f06-11ee-9c3e-02e069073447",
+      "AmplifyAppId": "d1ij4oqvv9gd0k"
+    },
+    "categories": {
+      "api": {
+        "amplifyDatasource": {}
+      }
+    }
+  }
+}

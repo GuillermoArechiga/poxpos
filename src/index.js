@@ -4,6 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { Amplify } from 'aws-amplify';
+import awsconfig from './aws-exports';
+
+Amplify.configure({
+  ...awsconfig,
+  aws_appsync_authenticationType: 'API_KEY',
+});
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
