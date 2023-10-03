@@ -7,10 +7,6 @@ function NewStoreModal({ onClose, onCreate, onUpdate, initialData }) {
     setFormState({ ...formState, name: event.target.value });
   };
 
-  const handleOwnerChange = (event) => {
-    setFormState({ ...formState, owner: event.target.value });
-  };
-
   const handleSubmit = () => {
     if (initialData) {
       // Handle update
@@ -32,13 +28,6 @@ function NewStoreModal({ onClose, onCreate, onUpdate, initialData }) {
           placeholder="Store Name"
           value={formState.name}
           onChange={handleNameChange}
-          className="w-full border p-2 mb-4 rounded"
-        />
-        <input
-          type="text"
-          placeholder="Store Owner"
-          value={formState.owner}
-          onChange={handleOwnerChange}
           className="w-full border p-2 mb-4 rounded"
         />
         <div className="text-right">

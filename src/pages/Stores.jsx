@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Store } from '../models';
 import NewStoreModal from '../components/StoreModal';
+import { Auth } from '@aws-amplify/auth';
 
 export default function Stores() {
   const [stores, updateStores] = useState([]);
@@ -32,20 +33,22 @@ export default function Stores() {
   const handleCreateOrUpdateStore = async (formData) => {
     if (!formData.name) return;
     try {
+      const user = await Auth.currentAuthenticatedUser(); // Get the current user
+  
       if (editData) {
         // If editData is available, update the store
         await DataStore.save(Store.copyOf(editData, (updated) => {
           updated.name = formData.name;
-          updated.owner = formData.owner;
+          updated.owner = user.username; // Set the owner to the current user's username
         }));
         console.log('Store updated successfully!', formData);
         setEditData(null); // Clear editData
       } else {
-        // Otherwise, create a new store
-        await DataStore.save(new Store({ ...formData }));
+        // Otherwise, create a new store with the current user as the owner
+        await DataStore.save(new Store({ ...formData, owner: user.username }));
         console.log('Store created successfully!', formData);
       }
-
+  
       setShowModal(false);
       await fetchStores();
     } catch (error) {
