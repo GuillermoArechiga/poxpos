@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Auth } from 'aws-amplify';
 import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const Login = ({ isAuthenticated, setIsAuthenticated }) => {
   const navigate = useNavigate();
@@ -13,6 +14,7 @@ const Login = ({ isAuthenticated, setIsAuthenticated }) => {
     try {
       await Auth.signIn(username, password);
       setIsAuthenticated(true); // Set isAuthenticated to true
+      toast.success('Welcome!');
       navigate('/dashboard');
     } catch (error) {
       console.error('Error signing in:', error);

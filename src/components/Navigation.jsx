@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
 
 const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
-    console.log('navbar:', isAuthenticated)
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -17,10 +16,34 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   };
 
   return (
-    <nav className='bg-indigo-500 p-4 flex justify-between'>
-      <div>
+    <nav className='bg-indigo-500 p-3 flex justify-between items-center'>
+      <div className='flex items-center'>
         <Link to='/' className='text-white text-2xl font-bold'>
           POXPOS
+        </Link>
+        <Link
+          to='/stores'
+          className='text-white text-2xl font-bold ml-4'
+        >
+          Stores
+        </Link>
+        <Link
+          to='/items'
+          className='text-white text-2xl font-bold ml-4'
+        >
+          Items
+        </Link>
+        <Link
+          to='/category'
+          className='text-white text-2xl font-bold ml-4'
+        >
+          Category
+        </Link>
+        <Link
+          to='/pos'
+          className='text-white text-2xl font-bold ml-4'
+        >
+          POS
         </Link>
       </div>
       <div>

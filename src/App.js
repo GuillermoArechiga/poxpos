@@ -6,7 +6,9 @@ import Registration from './pages/RegisterPage';
 import Login from './pages/LogInPage';
 import Navbar from './components/Navigation';
 import ErrorPage404 from './pages/ErrorPage404';
-
+import Items from './pages/Items';
+import Categories from './pages/Category';
+import Pos from './pages/Pos';
 
 import { Auth } from 'aws-amplify';
 
@@ -31,14 +33,44 @@ export default function App() {
         setIsAuthenticated={setIsAuthenticated}
       />
       <Routes>
-      <Route path='/login' element={isAuthenticated ? <Navigate to="/dashboard" /> : <Login />} />
-        <Route path='/register' element={<Registration />} />
-
-        <Route path='/dashboard' element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />} />
-        <Route path='/stores' element={isAuthenticated ? <Stores /> : <Navigate to="/login" />} />
-
-        {/* Redirect to 404 for unknown routes */}
-        <Route path='*' element={<ErrorPage404 />} /><Route path='*' element={<ErrorPage404 />} />
+        <Route
+          path='/login'
+          element={
+            <Login
+              element={
+                isAuthenticated ? <Navigate to='/dashboard' /> : <Login />
+              }
+              setIsAuthenticated={setIsAuthenticated}
+            />
+          }
+        />
+        <Route
+          path='/register'
+          element={
+            isAuthenticated ? <Navigate to='/dashboard' /> : <Registration />
+          }
+        />
+        <Route
+          path='/dashboard'
+          element={isAuthenticated ? <Dashboard /> : <Login />}
+        />
+        <Route
+          path='/items'
+          element={isAuthenticated ? <Items /> : <Login />}
+        />
+        <Route
+          path='/stores'
+          element={isAuthenticated ? <Stores /> : <Login />}
+        />
+        <Route
+          path='/category'
+          element={isAuthenticated ? <Categories /> : <Login />}
+        />
+        <Route
+          path='/pos'
+          element={isAuthenticated ? <Pos /> : <Login />}
+        />
+        <Route path='*' element={<ErrorPage404 />} />
       </Routes>
     </Router>
   );

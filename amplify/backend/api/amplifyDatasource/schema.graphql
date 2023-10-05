@@ -1,6 +1,80 @@
+type Expense @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  quantity: Float
+  cost_price: Float
+  total_expense: Float
+  payment: String
+  Supplier: Supplier @hasOne
+  Item: Item @hasOne
+  Category: Category @hasOne
+  owner: String
+  Store: Store @hasOne
+  Shift: Shift @hasOne
+}
+
+type Sale @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  item: String
+  quantity: Float
+  sale_price: Float
+  cost_price: Float
+  Order: Order @hasOne
+  Shift: Shift @hasOne
+}
+
+type Order @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  owner: String
+  payment: String
+  total_order: Float
+  revenue: Float
+  Store: Store @hasOne
+  Shift: Shift @hasOne
+}
+
+type Shift @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  owner: String
+  start_time: AWSDateTime
+  end_time: AWSDateTime
+  start_cash: Float
+  cash_sale: Float
+  card_sale: Float
+  total_sale: Float
+  is_open: Boolean
+  Store: Store @hasOne
+}
+
+type Item @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  cost_price: Float
+  sale_price: Float
+  start_stock: Float
+  stock: Float
+  bar_code: String
+  change_price: String
+  Category: Category @hasOne
+  Store: Store @hasOne
+  owner: String
+}
+
+type Supplier @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  owner: String
+  phone: String
+  location: String
+}
+
+type Category @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  name: String
+  owner: String
+}
+
 type Store @model @auth(rules: [{allow: public}]) {
   id: ID!
   name: String!
   owner: String!
-}
- 
+} 

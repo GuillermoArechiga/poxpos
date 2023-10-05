@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons'
 
-function NewStoreModal({ onClose, onCreate, onUpdate, onDelete, initialData }) {
+export default function CategoryModal({ onClose, onCreate, onUpdate, onDelete, initialData }) {
   const [formState, setFormState] = useState(
     initialData || { name: '', owner: '' }
   );
@@ -33,7 +33,7 @@ function NewStoreModal({ onClose, onCreate, onUpdate, onDelete, initialData }) {
     <div className='fixed inset-0 flex flex-col items-center justify-center z-50'>
       <div className='border p-12 shadow-xl rounded bg-white relative'>
         <h2 className='text-xl font-semibold mb-4 text-center'>
-          {initialData ? 'Edit Store' : 'New Store'}
+          {initialData ? 'Edit Category' : 'New Category'}
         </h2>
         <input
           type='text'
@@ -74,5 +74,3 @@ function NewStoreModal({ onClose, onCreate, onUpdate, onDelete, initialData }) {
     </div>
   );
 }
-
-export default NewStoreModal;

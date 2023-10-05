@@ -17,6 +17,12 @@
       },
       "auth": {
         "poxpos87719334": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d1ij4oqvv9gd0k",
+          "type": "manual"
+        }
       }
     }
   }
