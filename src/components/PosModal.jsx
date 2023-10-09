@@ -5,7 +5,7 @@ import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 export default function PosModal({ onClose, onSaveSelectedItems, totalOrder }) {
   const [selectedOption, setSelectedOption] = useState(0);
   const [customValue, setCustomValue] = useState('');
-  const [selectedPaymentOption, setSelectedPaymentOption] = useState('Card'); // Default payment option
+  const [selectedPaymentOption, setSelectedPaymentOption] = useState('Cash'); // Default payment option
 
   const handleOptionChange = (index) => {
     setSelectedOption(optionValues[index]);
@@ -44,8 +44,8 @@ export default function PosModal({ onClose, onSaveSelectedItems, totalOrder }) {
       <div className='border p-12 shadow-xl rounded bg-white relative'>
         {totalOrder > 0 && (
           <div className='mt-4'>
-            <p className='text-xl'>
-              Total Order Amount: ${totalOrder.toFixed(2)}
+            <p className='text-2xl font-semibold'>
+              Total Order: ${totalOrder.toFixed(2)}
             </p>
             <div className='flex justify-center mt-4'>
               {optionValues.map((optionValue, index) => (
@@ -81,7 +81,7 @@ export default function PosModal({ onClose, onSaveSelectedItems, totalOrder }) {
 
         {/* Payment Options */}
         <div className='mt-4'>
-          <p className='text-xl'>Payment Options:</p>
+          <p className='text-xl font-semibold'>Payment Options:</p>
           <div className='flex justify-center mt-2'>
             {paymentOptions.map((option, index) => (
               <label key={index} className='flex items-center space-x-2'>
@@ -91,7 +91,7 @@ export default function PosModal({ onClose, onSaveSelectedItems, totalOrder }) {
                   checked={selectedPaymentOption === option}
                   onChange={() => handlePaymentOptionChange(option)}
                 />
-                <span>{option}</span>
+                <span className='pe-10 text-lg font-sans'>{option}</span>
               </label>
             ))}
           </div>
@@ -102,7 +102,7 @@ export default function PosModal({ onClose, onSaveSelectedItems, totalOrder }) {
             className='bg-green-500 text-white px-4 py-2 rounded'
             onClick={handleSaveItemsClick}
           >
-            Save Selected Items
+            Proceed!
           </button>
         </div>
         <div className='absolute top-0 right-0 m-4'>

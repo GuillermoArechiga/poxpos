@@ -12,11 +12,9 @@ export default function Pos() {
   const [items, updateItems] = useState([]);
   const [categories, updateCategories] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [editData, setEditData] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all'); // Default selected category to 'all'
-  const [currentOrder, setCurrentOrder] = useState(null);
   const [itemQuantities, setItemQuantities] = useState({});
 
   useEffect(() => {
@@ -180,15 +178,13 @@ export default function Pos() {
     );
   };
 
-  
-
   return (
-    <div className='container mx-auto p-2 mt-3'>
+    <div className='mx-auto p-2 mt-3'>
       <div className='flex'>
         {/* Left Side: Categories and Items */}
         <div className='w-2/3 p-2' style={{ overflowX: 'auto' }}>
           {/* Categories and Items */}
-          <div className='flex overflow-x-auto px-8'>
+          <div className='flex overflow-x-auto px-4'>
             <div key='all' className='related'>
               <div
                 className={`rounded-full p-3 shadow-xl mx-6 ${
@@ -235,12 +231,12 @@ export default function Pos() {
 
           {/* Items */}
           <div className='container'>
-            <div className='border' style={{ height: '65vh' }}>
+            <div className='' style={{ height: '65vh' }}>
               <div
-                className='w-full p-4 border'
+                className='w-full p-2'
                 style={{ overflowY: 'auto', height: '100%' }}
               >
-                <div className='grid md:grid-cols-4 gap-4 p-6'>
+                <div className='grid md:grid-cols-4 gap-4 p-4'>
                   {items
                     .filter((item) => item.owner === currentUser)
                     .filter(
@@ -266,30 +262,19 @@ export default function Pos() {
         </div>
 
         {/* Right Side: Selected Items */}
-        <div className='w-1/3 p-4 '>
+        <div className='w-1/3 p-2 rounded shadow-xl'>
           <div
-            className='me-2 rounded shadow-xl'
-            style={{ height: '70vh', flexShrink: 0 }}
+            className='mx-auto'
+            style={{ height: '65vh', flexShrink: 0 }}
           >
-            <div className='p-4'>
-              <div className='flex items-center justify-end'>
-                <div className='text-xl font-semibold '>Total:</div>
-                {/* Display the total sum */}
-                <div className='ms-4'>${calculateTotal().toFixed(2)}</div>
+            <div className='mt-1 ms-4'>
+              <div className='flex items-center text-center'>
+                <div className='text-xl font-bold '>Order:</div>
               </div>
-              {currentOrder && (
-                <div>
-                  <div>Order ID: {currentOrder.id}</div>
-                  <div>
-                    Total Order Amount: ${currentOrder.total_order.toFixed(2)}
-                  </div>
-                  {/* Display other order details here */}
-                </div>
-              )}
             </div>
             <div
               className='selected-items-container'
-              style={{ maxHeight: 'calc(100vh - 230px)', overflowY: 'auto' }}
+              style={{ maxHeight: 'calc(100vh - 250px)', overflowY: 'auto' }}
             >
               <ul>
                 {selectedItems.map((item) => (
@@ -337,6 +322,15 @@ export default function Pos() {
                   </div>
                 ))}
               </ul>
+            </div>
+          </div>
+          <div className='bg-white rounded'>
+            <div className='flex items-center place-content-center'>
+              <div className='text-xl font-semibold'>Total:</div>
+              {/* Display the total sum */}
+              <div className='ms-4 font-bold text-xl'>
+                ${calculateTotal().toFixed(2)}
+              </div>
             </div>
           </div>
           {/* Add a button here */}
