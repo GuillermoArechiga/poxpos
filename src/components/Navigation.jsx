@@ -1,9 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Auth } from 'aws-amplify';
+import { useAuth } from './AuthContext'
 
-const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
+const Navbar = () => {
   const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useAuth(); // Use useAuth hook to access isAuthenticated
 
   const handleLogout = async () => {
     try {
@@ -16,7 +18,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
   };
 
   return (
-    <nav className='bg-indigo-500 p-3 flex justify-between items-center'>
+    <nav className='bg-blue-500 p-3 flex justify-between items-center'>
       <div className='flex items-center'>
         <Link to='/' className='text-white text-2xl font-bold'>
           POXPOS
@@ -39,7 +41,7 @@ const Navbar = ({ isAuthenticated, setIsAuthenticated }) => {
       </div>
       <div>
         {isAuthenticated ? (
-          <button className='text-white mr-4' onClick={handleLogout}>
+          <button className='text-red-300 mr-4 ' onClick={handleLogout}>
             Logout
           </button>
         ) : (

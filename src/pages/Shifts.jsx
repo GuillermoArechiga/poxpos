@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { DataStore } from '@aws-amplify/datastore';
 import { Shift } from '../models';
 import { Auth } from '@aws-amplify/auth';
@@ -30,7 +29,6 @@ export default function Shifts() {
     try {
       const shifts = await DataStore.query(Shift);
       updateShifts(shifts);
-      console.log(shifts);
     } catch (error) {
       console.error('Error fetching shifts:', error);
     }
