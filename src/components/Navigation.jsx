@@ -23,19 +23,19 @@ const Navbar = () => {
         <Link to='/' className='text-white text-2xl font-bold'>
           POXPOS
         </Link>
-        <Link to='/stores' className='text-white text-2xl font-bold ml-4'>
+        <Link to='/stores' className='text-white text-xl font-bold ml-12'>
           Stores
         </Link>
-        <Link to='/items' className='text-white text-2xl font-bold ml-4'>
+        <Link to='/items' className='text-white text-xl font-bold ml-4'>
           Items
         </Link>
-        <Link to='/category' className='text-white text-2xl font-bold ml-4'>
+        <Link to='/category' className='text-white text-xl font-bold ml-4'>
           Category
         </Link>
-        <Link to='/pos' className='text-white text-2xl font-bold ml-4'>
+        <Link to='/pos' className='text-white text-xl font-bold ml-4'>
           POS
         </Link>
-        <Link to='/shifts' className='text-white text-2xl font-bold ml-4'>
+        <Link to='/shifts' className='text-white text-xl font-bold ml-4'>
           Shifts
         </Link>
       </div>

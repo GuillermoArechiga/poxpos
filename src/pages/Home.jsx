@@ -10,7 +10,10 @@ const HomePage = () => {
       <div>
         <img src='./logopox.png' className='my-4' alt='Logo' />
       </div>
-      <h1 className='text-4xl font-semibold mb-4'>Site Under Construction</h1>
+      <h1 className='text-4xl font-bold mb-4'>Site Under Construction</h1>
+      <h3 className='text-2xl mb-4'>
+        Sign in to access all the great features and functions of my app.
+      </h3>
       <div className='space-x-4'>
         <button>
           {isAuthenticated ? (

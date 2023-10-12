@@ -12,7 +12,7 @@ import Items from './pages/Items';
 import Categories from './pages/Category';
 import Pos from './pages/Pos';
 import ShiftOpen from './pages/ShiftOpen';
-import Shifts from './pages/Shifts';
+import ShiftC from './pages/Shiftcopy';
 import Stores from './pages/Stores';
 import { AuthProvider, useAuth } from './components/AuthContext';
 
@@ -54,7 +54,7 @@ function App() {
         <Route path='/category' element={<PrivateRoute><Categories /></PrivateRoute>} />
         <Route path='/pos' element={<PrivateRoute>{shifts.some((shift) => shift.is_open) ? <Pos /> : <ShiftOpen />}</PrivateRoute>} />
         <Route path='/open_shift' element={<PrivateRoute>{!shifts.some((shift) => shift.is_open) ? <ShiftOpen /> : <Navigate to='/dashboard' />}</PrivateRoute>} />
-        <Route path='/shifts' element={<PrivateRoute><Shifts /></PrivateRoute>} />
+        <Route path='/shifts' element={<PrivateRoute><ShiftC /></PrivateRoute>} />
         <Route path='*' element={<PrivateRoute><ErrorPage404 /></PrivateRoute>} />
       </Routes>
     </Router>

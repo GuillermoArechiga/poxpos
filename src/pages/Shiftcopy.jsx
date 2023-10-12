@@ -2,19 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { DataStore } from '@aws-amplify/datastore';
 import { Shift } from '../models';
 import { Auth } from '@aws-amplify/auth';
+import ShiftModalC from '../components/ShiftModalC';
 
-export default function Stores() {
-  const [stores, updateStores] = useState([]);
+export default function ShiftC() {
+  const [shifts, updateShifts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editData, setEditData] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    fetchCurrentShift();
+    fetchCurrentUser();
     fetchShift();
-    const subscription = DataStore.observe(Shift).subscribe(() =>
-      fetchShift()
-    );
+    const subscription = DataStore.observe(Shift).subscribe(() => fetchShift());
     return () => subscription.unsubscribe();
   }, []);
 
@@ -28,8 +27,8 @@ export default function Stores() {
   }
 
   async function fetchShift() {
-    const stores = await DataStore.query(Shift);
-    updateStores(stores);
+    const shifts = await DataStore.query(Shift);
+    updateShifts(shifts);
   }
 
   async function deleteShift(storeId) {
@@ -43,36 +42,41 @@ export default function Stores() {
   }
 
   const handleCreateOrUpdateShift = async (formData) => {
-    if (!formData.name) return;
+    if (!formData.start_time) return;
     try {
-      const user = await Auth.currentAuthenticatedUser(); // Get the current user
+      const user = await Auth.currentAuthenticatedUser();
 
       if (editData) {
-        // If editData is available, update the store
-        await DataStore.save(
-          Store.copyOf(editData, (updated) => {
-            updated.name = formData.name;
-            updated.owner = user.username; // Set the owner to the current user's username
-          })
-        );
-        console.log('Store updated successfully!', formData);
+        // If editData is available, update the shift
+        const updatedShift = Shift.copyOf(editData, (updated) => {
+          updated.start_time = formData.start_time;
+          updated.end_time = new Date().toISOString();
+        });
+
+        await DataStore.save(updatedShift);
+        console.log('Shift updated successfully!', updatedShift);
         setEditData(null); // Clear editData
       } else {
-        // Otherwise, create a new store with the current user as the owner
-        await DataStore.save(new Store({ ...formData, owner: user.username }));
-        console.log('Store created successfully!', formData);
+        // Otherwise, create a new shift with the current user as the owner
+        const newShift = new Shift({
+          ...formData,
+          owner: user.username,
+          end_time: new Date().toISOString(),
+        });
+        await DataStore.save(newShift);
+        console.log('Shift created successfully!', newShift);
       }
 
       setShowModal(false);
-      await fetchStores();
+      await fetchShift();
     } catch (error) {
-      console.log('Error saving/updating store', error);
+      console.log('Error saving/updating shift', error);
     }
   };
 
   return (
     <div className='container'>
-      <p className='text-center text-3xl mt-4'>Stores</p>
+      <p className='text-center text-3xl mt-4'>Shifts</p>
       <div className='text-center mt-3'>
         <button
           className='bg-blue-500 text-white px-4 py-1 rounded'
@@ -81,31 +85,31 @@ export default function Stores() {
             setEditData(null); // Clear editData to create a new store
           }}
         >
-          New Store
+          New Shift
         </button>
       </div>
       {showModal && (
-        <NewStoreModal
+        <ShiftModalC
           onClose={() => setShowModal(false)}
-          onCreate={handleCreateOrUpdateStore}
-          onUpdate={handleCreateOrUpdateStore}
-          onDelete={(storeId) => deleteStore(storeId)} // Pass the deleteStore function here
+          onCreate={handleCreateOrUpdateShift}
+          onUpdate={handleCreateOrUpdateShift}
+          onDelete={(shiftId) => deleteShift(shiftId)} // Pass the deleteStore function here
           initialData={editData}
         />
       )}
       <div className='grid md:grid-cols-4 gap-4 p-6'>
-        {stores
-          .filter((store) => store.owner === currentUser) // Filter stores for the current user
-          .map((store) => (
-            <div className='rounded border p-3 shadow-xl' key={store.id}>
+        {shifts
+          .filter((shift) => shift.owner === currentUser) // Filter stores for the current user
+          .map((shift) => (
+            <div className='rounded border p-3 shadow-xl' key={shift.id}>
               <div
                 className='text-center w-100'
                 onClick={() => {
                   setShowModal(true);
-                  setEditData(store); // Set editData for editing
+                  setEditData(shift); // Set editData for editing
                 }}
               >
-                <div className='py-2'>{store.name}</div>
+                <div className='py-2'>{shift.start_time}</div>
               </div>
             </div>
           ))}

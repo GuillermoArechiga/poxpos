@@ -159,7 +159,7 @@ type EagerShift = {
   readonly cash_sale?: number | null;
   readonly card_sale?: number | null;
   readonly total_sale?: number | null;
-  readonly is_open?: boolean | null;
+  readonly is_open?: string | null;
   readonly Store?: Store | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
@@ -179,7 +179,7 @@ type LazyShift = {
   readonly cash_sale?: number | null;
   readonly card_sale?: number | null;
   readonly total_sale?: number | null;
-  readonly is_open?: boolean | null;
+  readonly is_open?: string | null;
   readonly Store: AsyncItem<Store | undefined>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;

@@ -5,7 +5,7 @@
  **************************************************************************/
 
 import * as React from "react";
-import { GridProps, SwitchFieldProps, TextFieldProps } from "@aws-amplify/ui-react";
+import { GridProps, TextFieldProps } from "@aws-amplify/ui-react";
 import { EscapeHatchProps } from "@aws-amplify/ui-react/internal";
 export declare type ValidationResponse = {
     hasError: boolean;
@@ -20,7 +20,7 @@ export declare type ShiftCreateFormInputValues = {
     cash_sale?: number;
     card_sale?: number;
     total_sale?: number;
-    is_open?: boolean;
+    is_open?: string;
 };
 export declare type ShiftCreateFormValidationValues = {
     owner?: ValidationFunction<string>;
@@ -30,7 +30,7 @@ export declare type ShiftCreateFormValidationValues = {
     cash_sale?: ValidationFunction<number>;
     card_sale?: ValidationFunction<number>;
     total_sale?: ValidationFunction<number>;
-    is_open?: ValidationFunction<boolean>;
+    is_open?: ValidationFunction<string>;
 };
 export declare type PrimitiveOverrideProps<T> = Partial<T> & React.DOMAttributes<HTMLDivElement>;
 export declare type ShiftCreateFormOverridesProps = {
@@ -42,7 +42,7 @@ export declare type ShiftCreateFormOverridesProps = {
     cash_sale?: PrimitiveOverrideProps<TextFieldProps>;
     card_sale?: PrimitiveOverrideProps<TextFieldProps>;
     total_sale?: PrimitiveOverrideProps<TextFieldProps>;
-    is_open?: PrimitiveOverrideProps<SwitchFieldProps>;
+    is_open?: PrimitiveOverrideProps<TextFieldProps>;
 } & EscapeHatchProps;
 export declare type ShiftCreateFormProps = React.PropsWithChildren<{
     overrides?: ShiftCreateFormOverridesProps | undefined | null;

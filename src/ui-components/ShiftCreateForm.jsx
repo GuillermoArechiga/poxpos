@@ -6,13 +6,7 @@
 
 /* eslint-disable */
 import * as React from "react";
-import {
-  Button,
-  Flex,
-  Grid,
-  SwitchField,
-  TextField,
-} from "@aws-amplify/ui-react";
+import { Button, Flex, Grid, TextField } from "@aws-amplify/ui-react";
 import { getOverrideProps } from "@aws-amplify/ui-react/internal";
 import { Shift } from "../models";
 import { fetchByPath, validateField } from "./utils";
@@ -36,7 +30,7 @@ export default function ShiftCreateForm(props) {
     cash_sale: "",
     card_sale: "",
     total_sale: "",
-    is_open: false,
+    is_open: "",
   };
   const [owner, setOwner] = React.useState(initialValues.owner);
   const [start_time, setStart_time] = React.useState(initialValues.start_time);
@@ -84,23 +78,6 @@ export default function ShiftCreateForm(props) {
     }
     setErrors((errors) => ({ ...errors, [fieldName]: validationResponse }));
     return validationResponse;
-  };
-  const convertToLocal = (date) => {
-    const df = new Intl.DateTimeFormat("default", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      calendar: "iso8601",
-      numberingSystem: "latn",
-      hourCycle: "h23",
-    });
-    const parts = df.formatToParts(date).reduce((acc, part) => {
-      acc[part.type] = part.value;
-      return acc;
-    }, {});
-    return `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}`;
   };
   return (
     <Grid
@@ -199,11 +176,9 @@ export default function ShiftCreateForm(props) {
         label="Start time"
         isRequired={false}
         isReadOnly={false}
-        type="datetime-local"
-        value={start_time && convertToLocal(new Date(start_time))}
+        value={start_time}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
@@ -232,11 +207,9 @@ export default function ShiftCreateForm(props) {
         label="End time"
         isRequired={false}
         isReadOnly={false}
-        type="datetime-local"
-        value={end_time && convertToLocal(new Date(end_time))}
+        value={end_time}
         onChange={(e) => {
-          let value =
-            e.target.value === "" ? "" : new Date(e.target.value).toISOString();
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
@@ -401,13 +374,13 @@ export default function ShiftCreateForm(props) {
         hasError={errors.total_sale?.hasError}
         {...getOverrideProps(overrides, "total_sale")}
       ></TextField>
-      <SwitchField
+      <TextField
         label="Is open"
-        defaultChecked={false}
-        isDisabled={false}
-        isChecked={is_open}
+        isRequired={false}
+        isReadOnly={false}
+        value={is_open}
         onChange={(e) => {
-          let value = e.target.checked;
+          let { value } = e.target;
           if (onChange) {
             const modelFields = {
               owner,
@@ -431,7 +404,7 @@ export default function ShiftCreateForm(props) {
         errorMessage={errors.is_open?.errorMessage}
         hasError={errors.is_open?.hasError}
         {...getOverrideProps(overrides, "is_open")}
-      ></SwitchField>
+      ></TextField>
       <Flex
         justifyContent="space-between"
         {...getOverrideProps(overrides, "CTAFlex")}

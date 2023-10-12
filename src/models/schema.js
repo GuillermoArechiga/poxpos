@@ -492,14 +492,14 @@ export const schema = {
                 "start_time": {
                     "name": "start_time",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
                 "end_time": {
                     "name": "end_time",
                     "isArray": false,
-                    "type": "AWSDateTime",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -534,7 +534,7 @@ export const schema = {
                 "is_open": {
                     "name": "is_open",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "String",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -979,5 +979,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.4",
-    "version": "68d3d32daaee5ba4405d01f349726d05"
+    "version": "6701c1a5bb84c5c2f0938f28b99577c5"
 };

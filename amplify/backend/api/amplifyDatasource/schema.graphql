@@ -35,13 +35,13 @@ type Order @model @auth(rules: [{allow: public}]) {
 type Shift @model @auth(rules: [{allow: public}]) {
   id: ID!
   owner: String
-  start_time: AWSDateTime
-  end_time: AWSDateTime
+  start_time: String
+  end_time: String
   start_cash: Float
   cash_sale: Float
   card_sale: Float
   total_sale: Float
-  is_open: Boolean
+  is_open: String
   Store: Store @hasOne
 }
 

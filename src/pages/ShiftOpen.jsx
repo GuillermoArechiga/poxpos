@@ -49,7 +49,7 @@ export default function ShiftOpen() {
       const newShift = {
         owner: user.username,
         start_time: new Date().toISOString(),
-        is_open: true,
+        is_open: "true",
         start_cash: parseFloat(startCash),
       };
 
